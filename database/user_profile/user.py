@@ -33,6 +33,23 @@ class FurinaUserInfo(BaseModel):
     account_type: str
 
 
+def insert_all_things(uid):
+    try:
+        insert_ego_formats(uid)
+        insert_personality_formats(uid)
+        insert_item_formats(uid)
+        insert_announcer_format(uid)
+        insert_formation_formats(uid)
+        insert_user_banner_data_formats(uid)
+        insert_profile_ticket_data(uid)
+        insert_user_public_profile_with_supporters_format(uid)
+        # insert_lobby_cg_format(uid)
+        insert_railway_dungeon_save_info(uid)
+
+    except Exception as e:
+        print("WARN:     " + str(e))
+
+
 def create_user(uid: int, token: str, account_type: str) -> int:
     try:
         curr_date = get_date_time()
@@ -50,17 +67,7 @@ def create_user(uid: int, token: str, account_type: str) -> int:
         ).dict()
 
         user_collection.insert_one(user)
-
-        insert_ego_formats(uid)
-        insert_personality_formats(uid)
-        insert_item_formats(uid)
-        insert_announcer_format(uid)
-        insert_formation_formats(uid)
-        insert_user_banner_data_formats(uid)
-        insert_profile_ticket_data(uid)
-        insert_user_public_profile_with_supporters_format(uid)
-        # insert_lobby_cg_format(uid)
-        insert_railway_dungeon_save_info(uid)
+        insert_all_things(uid)
 
         return uid
 
