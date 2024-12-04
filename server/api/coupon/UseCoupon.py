@@ -1,5 +1,5 @@
 import re
-from server.config import ALLOW_SYNC_COMMAND
+from server.config import ALLOW_SYNC_COMMAND, ALLOW_RESET_DB_COMMAND
 from limbus.requests import Cs, ReqUseCoupon
 from limbus.responses import Sc, RspUseCoupon
 from limbus.formats import (
@@ -20,7 +20,12 @@ from database.user_stuff.item import update_item_format, sync_item_formats
 from database.user_stuff.announcer import sync_announcer_format
 from database.user_profile.banner import sync_profile_banner_data
 from database.user_profile.ticket import sync_profile_ticket_data
-from database.user_profile.user import update_user_info, get_user_info_by_uid
+from database.user_profile.user import (
+    update_user_info,
+    get_user_info_by_uid,
+    insert_all_things,
+)
+from database.utility import wipe_all_docs_contains_uid
 
 
 def extract_ints(input_str: str, expected_count: int) -> tuple:
@@ -39,6 +44,36 @@ async def handle(req: Cs[ReqUseCoupon]):
     uid = req.userAuth.uid
     code = req.parameters.code
     match code[:1]:
+        # RESET command, so u dont have to open mongodb compass
+        # to delete all your docs and relogin to
+        # reset db to default
+        case "R":
+            if code != "RESET" and ALLOW_RESET_DB_COMMAND is not True:
+                return Sc[RspUseCoupon](result=RspUseCoupon(state=2))
+            else:
+                wipe_all_docs_contains_uid(uid)
+                insert_all_things(uid)
+                print(
+                    "INFO:     "
+                    + f"Database for user with id {uid} has been reset to default."
+                )
+
+                return Sc[RspUseCoupon](
+                    result=RspUseCoupon(
+                        state=1,
+                        rewards=[
+                            Element(
+                                type=STR_ELEMENT_TYPE.ITEM,
+                                _type=ELEMENT_TYPE.ITEM,
+                                id=2,
+                                num=1,
+                            )
+                        ],
+                    ),
+                )
+        # SYNC command, to update owned stuff when
+        # game updates and releases new stuff.
+        # make sure to update git submodule first.
         case "S":
             if code[:4] != "SYNC" and ALLOW_SYNC_COMMAND is not True:
                 return Sc[RspUseCoupon](result=RspUseCoupon(state=2))
