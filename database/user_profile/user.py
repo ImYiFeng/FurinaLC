@@ -14,6 +14,7 @@ from database.user_profile.ticket import insert_profile_ticket_data
 from database.user_profile.profile import (
     insert_user_public_profile_with_supporters_format,
 )
+from database.railway_dungeon.save_info import insert_railway_dungeon_save_info
 # from database.lobbycg import insert_lobby_cg_format
 
 user_collection = db["users"]
@@ -59,6 +60,7 @@ def create_user(uid: int, token: str, account_type: str) -> int:
         insert_profile_ticket_data(uid)
         insert_user_public_profile_with_supporters_format(uid)
         # insert_lobby_cg_format(uid)
+        insert_railway_dungeon_save_info(uid)
 
         return uid
 
