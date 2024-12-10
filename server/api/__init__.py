@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from .battle import (
     EnterExpDungeon,
     EnterRailwayDungeon,
+    EnterRailwayDungeonNode,
     EnterStageBattle,
     ExitExpDungeon,
     ExitStageBattle,
@@ -74,3 +75,4 @@ def add_api_handler(app: FastAPI):
     app.post("/api/GetDanteNoteState")(GetDanteNoteState.handle)
     app.post("/api/PlayGacha")(PlayGacha.handle)
     app.post("/api/ExitStory")(ExitStory.handle)
+    app.post("/api/EnterRailwayDungeonNode")(EnterRailwayDungeonNode.handle)

@@ -104,6 +104,7 @@ def update_railway_dungeon_save_info(
     prevclearnode: Optional[int] = None,
     currentnode: Optional[int] = None,
     lastclearnode: Optional[int] = None,
+    personalities: Optional[List[RailwayUnitInfoFormat]] = None,
     payreward: Optional[int] = None,
     rewardstate: Optional[int] = None,
     extrarewardstate: Optional[List[RailwayExtraRewardStateFormat]] = None,
@@ -124,6 +125,8 @@ def update_railway_dungeon_save_info(
             update_fields["currentnode"] = currentnode
         if lastclearnode is not None:
             update_fields["lastclearnode"] = lastclearnode
+        if personalities is not None:
+            update_fields["personalities"] = [p.dict() for p in personalities]
         if payreward is not None:
             update_fields["payreward"] = payreward
         if rewardstate is not None:

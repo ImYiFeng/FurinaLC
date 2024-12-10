@@ -18,6 +18,10 @@ Yes. You can use them through the coupon menu. Current commands are such:
 
 (Note: they aren't case sensitive, as limbus client automatically uppercases the input when sending to the server)
 
+- RESET
+
+    This command will reset a user's database to default.
+
 - SYNC
 
     This command will update your owned stuff, making sure it's up to date with the latest limbus stuff. Make sure the git submodule is updated before running this.
