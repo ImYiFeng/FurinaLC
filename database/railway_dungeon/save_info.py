@@ -5,13 +5,20 @@ from resources.parser.railway_dungeon.railway_info import (
     # fetch_railway_info_list,
     create_railway_dungeon_save_info_format,
 )
+from resources.parser.railway_dungeon.railway_info import (
+    # fetch_railway_info_list,
+    create_railway_dungeon_save_info_format,
+)
 from limbus.formats import (
+    RailwayDungeonSaveInfoFormat,
     RailwayDungeonSaveInfoFormat,
     RailwayUnitInfoFormat,
     RailwayExtraRewardStateFormat,
     RailwayBuffSetFormat,
     SaveDataForRailwayDungeon,
 )
+
+rd_save_collection = db["railway_dungeon_saves"]
 
 rd_save_collection = db["railway_dungeon_saves"]
 
