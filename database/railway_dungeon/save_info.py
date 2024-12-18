@@ -20,9 +20,6 @@ from limbus.formats import (
 
 rd_save_collection = db["railway_dungeon_saves"]
 
-rd_save_collection = db["railway_dungeon_saves"]
-
-
 class RailwayDungeonSaveInfoFormatWithUID(BaseModel):
     uid: int
     id: int
