@@ -3,7 +3,7 @@ from limbus.responses import Sc, RspGetDungeonSaveInfoAll
 from limbus.formats import (
     StoryDungeonSaveInfoFormat,
     MirrorDungeonSaveInfoFormat,
-    RailwayDungeonSaveInfoFormat,
+    # RailwayDungeonSaveInfoFormat,
     StoryMirrorDungeonSaveInfoFormat,
     # StoryDungeonCurrentInfoFormat,
     # DungeonMapNodeFormat,
@@ -12,12 +12,14 @@ from limbus.formats import (
     MirrorDungeonClearInfoFormat,
     MirrorDungeonHistoryFormat,
 )
+from database.railway_dungeon.save_info import get_railway_dungeon_save_info
 
 
 async def handle(req: Cs[ReqGetDungeonSaveInfoAll]):
     railway_id = req.parameters.railwayDungeonId
+    user_id = req.userAuth.uid
 
-    story_safe_info = StoryDungeonSaveInfoFormat()
+    story_save_info = StoryDungeonSaveInfoFormat()
 
     mirror_origin_save_info = MirrorDungeonSaveInfoFormat(
         dungeonId=-1,
@@ -27,11 +29,7 @@ async def handle(req: Cs[ReqGetDungeonSaveInfoAll]):
         ),
     )
 
-    railway_save_info = RailwayDungeonSaveInfoFormat(
-        id=railway_id,
-        prevclearnode=-1,
-        lastenternodeid=1,
-    )
+    railway_save_info = get_railway_dungeon_save_info(user_id, railway_id)
 
     story_mirror_save_info = StoryMirrorDungeonSaveInfoFormat(
         dungeonid=-1,
@@ -57,7 +55,7 @@ async def handle(req: Cs[ReqGetDungeonSaveInfoAll]):
 
     return Sc[RspGetDungeonSaveInfoAll](
         result=RspGetDungeonSaveInfoAll(
-            storySaveInfo=story_safe_info,
+            storySaveInfo=story_save_info,
             mirrorOriginSaveInfo=mirror_origin_save_info,
             railwaySaveInfo=railway_save_info,
             storyMirrorSaveInfo=story_mirror_save_info,

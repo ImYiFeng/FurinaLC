@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Optional
 from pathlib import Path
+from limbus.formats import RailwayDungeonSaveInfoFormat
 
 FOLDER = "./resources/LimbusStaticData/StaticData/static-data/railway-dungeon"
 
@@ -122,3 +123,13 @@ def fetch_railway_info_list(
             print(f"Error parsing {file_path}: {e}")
 
     return None
+
+
+def create_railway_dungeon_save_info_format(
+    railway_id: int = 4,
+) -> RailwayDungeonSaveInfoFormat:
+    return RailwayDungeonSaveInfoFormat(
+        id=railway_id,
+        prevclearnode=-1,
+        lastenternodeid=1,
+    )
