@@ -1,11 +1,16 @@
+## WARNING
+You will probably get banned for using FurinaLC. 
 
+It's recommended that you use [Lethe](https://lethelc.site) instead (especially with Zwei) as it bypasses and blocks any sort of detection for private servers that Project Moon added.
 
-# WARNING
-YOU WILL 99.99% GET BANNED FOR USING FURINALC, PROJECT MOON HAS ADDED A DETECTION FOR PRIVATE SERVER PLAYERS, IT IS RECOMMENDED THAT YOU WAIT FOR THE NEWEST VERSION OF THE ALTERNATIVE & BETTER PRIVATE SERVER [LETHE](https://lethelc.site) AS IT WILL BE ABLE TO BYPASS THE DETECTION. HOWEVER, IF YOU ARE ALREADY BANNED IN THE FIRST PLACE, OR IF YOU DON'T CARE ABOUT GETTING BANNED, ENJOY FURINALC!
-
--- --
+However, if you're already banned, or do not care at all, enjoy.
 
 # FurinaLC
+
+## PROJECT STATUS
+This project is not currently under active development and is unlikely to resume in the foreseeable future. However, updates will still be provided to address changes in Limbus Company packet encryption if they occur, and enhancement pull requests are welcomed.
+
+-- --
 
 **FurinaLC** is a server reimplementation for *Limbus Company*, named after the second-best girl from *Genshin Impact*. 
 
